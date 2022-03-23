@@ -3,6 +3,5 @@ export const fetchInfo = async ({ queryKey }) => {
 
     const res = await fetch(`http://swapi.dev/api/${type}/?page=${page}`)
     const data = await res.json()
-    // console.log(data);
     return data
 }
