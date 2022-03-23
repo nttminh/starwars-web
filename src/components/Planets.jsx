@@ -2,7 +2,7 @@ import React from 'react'
 
 const Planets = () => {
     return (
-        <div>Planets</div>
+        <h2>Planets</h2>
     )
 }
 

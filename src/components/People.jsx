@@ -2,7 +2,7 @@ import React from 'react'
 
 const People = () => {
     return (
-        <div>People</div>
+        <h2>People</h2>
     )
 }
 
