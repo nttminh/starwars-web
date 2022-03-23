@@ -1,20 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useQuery } from 'react-query'
+import { fetchInfo } from '../helpers/fetchInfo'
 import Person from './Person'
 
-const fetchPeople = async () => {
-    const res = await fetch('http://swapi.dev/api/people/')
-    return res.json()
-}
 
 const People = () => {
-    const { data, status } = useQuery('people', fetchPeople)
-
-    // console.log(data);
+    const [page, setPage] = useState(1)
+    const { data, status } = useQuery(['people', 'people', page], fetchInfo)
 
     return (<div>
         <h2>People</h2>
-        {/* <p>{status}</p> */}
+        <button
+            onClick={() => setPage(old => Math.max(old - 1, 1))}
+            disabled={page === 1}
+        >Prev</button>
+        <span>{page}</span>
+        <button
+            onClick={() => setPage(old => !data || !data.next ? old : old + 1)}
+            disabled={!data || !data.next}
+        >Next</button>
 
         {status === 'loading' && (<div>Loading data...</div>)}
         {status === 'error' && (<div>Error fetching data</div>)}
